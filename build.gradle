@@ -1,0 +1,62 @@
+plugins {
+    id 'org.springframework.boot' version '3.0.0-M2'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'org.asciidoctor.convert' version '1.5.8'
+    id 'java'
+    id 'groovy'
+}
+
+group = 'pl.ksz'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '18'
+
+repositories {
+    mavenCentral()
+    maven { url 'https://repo.spring.io/milestone' }
+}
+
+ext {
+    set('snippetsDir', file("build/generated-snippets"))
+    set('testcontainersVersion', "1.16.2")
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-data-rest'
+    implementation 'org.springframework.boot:spring-boot-starter-jooq'
+    implementation 'org.springframework.boot:spring-boot-starter-mail'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.liquibase:liquibase-core'
+    implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5:3.1.0.M1'
+    runtimeOnly 'org.postgresql:postgresql'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
+    testImplementation 'org.springframework.security:spring-security-test'
+    testImplementation 'org.testcontainers:junit-jupiter'
+    testImplementation 'org.testcontainers:postgresql'
+
+    //spock
+    testImplementation 'org.spockframework:spock-core:2.2-M1-groovy-4.0'
+    testImplementation 'org.spockframework:spock-core:2.2-M1-groovy-4.0'
+    testImplementation 'org.codehaus.groovy:groovy-all:3.0.10'
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.testcontainers:testcontainers-bom:${testcontainersVersion}"
+    }
+}
+
+tasks.named('test') {
+    outputs.dir snippetsDir
+    useJUnitPlatform()
+}
+
+tasks.named('asciidoctor') {
+    inputs.dir snippetsDir
+    dependsOn test
+}
