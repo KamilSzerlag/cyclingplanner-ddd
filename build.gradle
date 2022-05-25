@@ -4,6 +4,7 @@ plugins {
     id 'org.asciidoctor.convert' version '1.5.8'
     id 'java'
     id 'groovy'
+    id "io.freefair.lombok" version "6.4.3"
 }
 
 group = 'pl.ksz'
@@ -42,7 +43,16 @@ dependencies {
     //spock
     testImplementation 'org.spockframework:spock-core:2.2-M1-groovy-4.0'
     testImplementation 'org.spockframework:spock-core:2.2-M1-groovy-4.0'
-    testImplementation 'org.codehaus.groovy:groovy-all:3.0.10'
+    testImplementation 'org.apache.groovy:groovy:4.0.2'
+
+    //jpx - for gpx
+    implementation 'io.jenetics:jpx:3.0.1'
+
+    //functional library for Java
+    implementation 'io.vavr:vavr:0.10.4'
+
+    //Faker
+    testImplementation 'com.github.javafaker:javafaker:0.12'
 }
 
 dependencyManagement {
