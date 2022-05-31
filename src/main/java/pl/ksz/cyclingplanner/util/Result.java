@@ -1,9 +1,9 @@
-package pl.ksz.cyclingplanner.template.domain;
+package pl.ksz.cyclingplanner.util;
 
 import java.util.NoSuchElementException;
 import java.util.function.Function;
 
-interface Result<L, R> {
+public interface Result<L, R> {
 
     L getFailure();
 
@@ -57,8 +57,6 @@ interface Result<L, R> {
             return value;
         }
     }
-
-
 
 
 }

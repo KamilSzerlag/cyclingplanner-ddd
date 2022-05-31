@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 /**
  * Value Object
  */
-public final class WorkoutDate {
+final class WorkoutDate {
 
     private WorkoutDate(LocalDateTime trainingDate) {
         this.trainingDate = trainingDate;

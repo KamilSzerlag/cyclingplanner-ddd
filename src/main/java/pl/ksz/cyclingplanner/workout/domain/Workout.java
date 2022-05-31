@@ -1,22 +1,21 @@
 package pl.ksz.cyclingplanner.workout.domain;
 
 import java.time.LocalDateTime;
+import pl.ksz.cyclingplanner.util.Aggregate;
+import pl.ksz.cyclingplanner.util.Result;
 import pl.ksz.cyclingplanner.workout.domain.MarkingCyclingTrainingPlanFailure.InappropriateCyclingTrainingStatusTarget;
-import pl.ksz.cyclingplanner.workout.domain.Result.Failure;
-import pl.ksz.cyclingplanner.workout.domain.Result.Success;
+import pl.ksz.cyclingplanner.util.Result.Failure;
+import pl.ksz.cyclingplanner.util.Result.Success;
 
 /**
  * Aggregate
  */
+@Aggregate
 public final class Workout {
 
 //    workoutTemplate
 //    status;
 //    athleteId;
-//    plannedWorkouts;
-//    doneWorkouts;
-
-
 
     public static Result<CreatingWorkoutFailure, WorkoutTemplate> createNewWorkoutTemplate(WorkoutName workoutName, WorkoutPerformanceParameters expectedPerformanceParameters) {
         if (workoutName != null && expectedPerformanceParameters != null) {
@@ -56,11 +55,11 @@ public final class Workout {
 
 
     Result<ChangingWorkoutDateFailure, Workout> changeCyclingTrainingPlanDate() {
-        return Result.success(new Workout());
+        return new Success<>(new Workout());
     }
 
     Result<IllegalStateException, Workout> changeCyclingTrainingPlanParameters() {
-        return Result.success(new Workout());
+        return new Success<>(new Workout());
     }
 
 

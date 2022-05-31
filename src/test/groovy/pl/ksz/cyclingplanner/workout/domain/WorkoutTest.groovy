@@ -1,4 +1,4 @@
-package pl.ksz.cyclingplanner.domain
+package pl.ksz.cyclingplanner.workout.domain
 
 
 import pl.ksz.cyclingplanner.workout.domain.Workout
@@ -24,7 +24,7 @@ class WorkoutTest extends Specification {
     }
 
     def "should not create workout template without name"() {
-        when: "athlete creates new workout without name"
+        when: "athlete creates new workout without value"
             def workoutTemplateCreationResult = createNewWorkoutTemplate(null, aSimpleWorkoutPerformanceParameters())
         then: "workout template not created"
             workoutTemplateCreationResult.failure
@@ -33,7 +33,7 @@ class WorkoutTest extends Specification {
     }
 
     def "should not create workout template without performance parameters"() {
-        when: "athlete creates new workout without name"
+        when: "athlete creates new workout without value"
             def workoutTemplateCreationResult = createNewWorkoutTemplate(aRandomWorkoutName(), null)
         then: "workout template not created"
             workoutTemplateCreationResult.failure
@@ -42,7 +42,7 @@ class WorkoutTest extends Specification {
     }
 
     def "should not create workout that exceed athlete abilities"() {
-//        when: "athlete creates new workout without name"
+//        when: "athlete creates new workout without value"
 //            def workoutTemplateCreationResult = createNewWorkoutTemplate(aRandomWorkoutName(), null)
 //        then: "workout template not created"
 //            workoutTemplateCreationResult.failure
