@@ -6,12 +6,12 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 import org.springframework.stereotype.Repository;
-import pl.ksz.cyclingplanner.template.domain.WorkoutRepository;
+import pl.ksz.cyclingplanner.template.domain.WorkoutTemplateRepository;
 import pl.ksz.cyclingplanner.template.domain.WorkoutTemplate;
 import pl.ksz.cyclingplanner.template.domain.WorkoutTemplateId;
 
 @Repository
-public class InMemoryWorkoutRepository implements WorkoutRepository {
+public class InMemoryWorkoutTemplateRepository implements WorkoutTemplateRepository {
 
     private final Map<UUID, WorkoutTemplate> workoutTemplateStorage = new HashMap<>();
 

@@ -3,7 +3,6 @@ package pl.ksz.cyclingplanner.template.application;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.function.Function;
@@ -12,7 +11,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import pl.ksz.cyclingplanner.template.domain.Athlete;
 import pl.ksz.cyclingplanner.template.domain.AthleteId;
-import pl.ksz.cyclingplanner.template.domain.WorkoutRepository;
+import pl.ksz.cyclingplanner.template.domain.WorkoutTemplateRepository;
 import pl.ksz.cyclingplanner.template.domain.WorkoutTemplate;
 import pl.ksz.cyclingplanner.template.domain.WorkoutTemplateFailure.CreatingWorkoutTemplateFailure;
 import pl.ksz.cyclingplanner.template.domain.WorkoutTemplateFailure.FindingWorkoutTemplateFailure;
@@ -25,12 +24,12 @@ import pl.ksz.cyclingplanner.util.Result.Success;
 class WorkoutTemplateServiceImpl implements WorkoutTemplateService {
 
     private final WorkoutTemplateMapper workoutTemplateMapper;
-    private final WorkoutRepository workoutRepository;
+    private final WorkoutTemplateRepository workoutTemplateRepository;
 
     public WorkoutTemplateServiceImpl(WorkoutTemplateMapper workoutTemplateMapper,
-            WorkoutRepository workoutRepository) {
+            WorkoutTemplateRepository workoutTemplateRepository) {
         this.workoutTemplateMapper = workoutTemplateMapper;
-        this.workoutRepository = workoutRepository;
+        this.workoutTemplateRepository = workoutTemplateRepository;
     }
 
     @Override
@@ -38,7 +37,7 @@ class WorkoutTemplateServiceImpl implements WorkoutTemplateService {
         return workoutTemplateMapper
                 .mapDTO()
                 .andThen(this::provideTemplateCreator)
-                .andThen(workoutRepository::save)
+                .andThen(workoutTemplateRepository::save)
                 .andThen(WorkoutTemplate::getId)
                 .andThen(Success::new);
     }
@@ -46,7 +45,7 @@ class WorkoutTemplateServiceImpl implements WorkoutTemplateService {
     @Override
     public Function<UUID, Result<FindingWorkoutTemplateFailure, WorkoutTemplate>> findById() {
         return id -> {
-            Optional<WorkoutTemplate> byId = workoutRepository.findById(new WorkoutTemplateId(id));
+            Optional<WorkoutTemplate> byId = workoutTemplateRepository.findById(new WorkoutTemplateId(id));
             if (byId.isPresent()) {
                 return Result.success(byId.get());
             }
@@ -56,7 +55,7 @@ class WorkoutTemplateServiceImpl implements WorkoutTemplateService {
 
     @Override
     public Supplier<Result<FindingWorkoutTemplateFailure, List<WorkoutTemplate>>> findAll() {
-        return () -> Result.success(workoutRepository.findAllByAthleteId(
+        return () -> Result.success(workoutTemplateRepository.findAllByAthleteId(
                 requireNonNull(getPrincipal()).id()));
     }
 

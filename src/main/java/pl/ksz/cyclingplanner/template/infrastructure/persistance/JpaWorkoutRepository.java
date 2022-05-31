@@ -1,12 +1,5 @@
 package pl.ksz.cyclingplanner.template.infrastructure.persistance;
 
-import java.util.Optional;
-import java.util.UUID;
-import org.springframework.stereotype.Repository;
-import pl.ksz.cyclingplanner.template.domain.WorkoutRepository;
-import pl.ksz.cyclingplanner.template.domain.WorkoutTemplate;
-import pl.ksz.cyclingplanner.template.domain.WorkoutTemplateId;
-
 //@Repository
 //public class JpaWorkoutRepository implements WorkoutRepository {
 //

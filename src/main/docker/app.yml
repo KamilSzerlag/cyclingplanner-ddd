@@ -1,9 +1,11 @@
-version: '3'
+version: '3.9'
 
 volumes:
   postgres_cp_data:
     driver: local
   postgres_kc_data:
+    driver: local
+  pgadmin:
     driver: local
 
 services:
@@ -17,7 +19,9 @@ services:
       POSTGRES_PASSWORD: password
       POSTGRES_HOST_AUTH_METHOD: trust
     ports:
-      - 35432:5432
+      - "35432:5432"
+    networks:
+      - backend
   postgres_kc:
     image: postgres:13.4
     volumes:
@@ -28,22 +32,48 @@ services:
       POSTGRES_PASSWORD: password
       POSTGRES_HOST_AUTH_METHOD: trust
     ports:
-      - 25432:5432
+      - "25432:5432"
+    networks:
+      - backend
+  pgadmin:
+    container_name: pgadmin_container
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-pgadmin4@pgadmin.org}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-admin}
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    volumes:
+      - pgadmin:/var/lib/pgadmin
+    networks:
+      - backend
+
+    ports:
+      - "${PGADMIN_PORT:-5050}:80"
   keycloak:
-    image: bitnami/keycloak
+    image: quay.io/keycloak/keycloak
+    env_file:
+      - ./keycloak.dev.env
     environment:
       DB_VENDOR: POSTGRES
-      DB_ADDR: postgres
+      DB_ADDR: postgres_kc
       DB_DATABASE: keycloak
       DB_USER: keycloak
       DB_SCHEMA: public
       DB_PASSWORD: password
-      KEYCLOAK_ADMIN_USER: admin
-      KEYCLOAK_ADMIN_PASSWORD: Pa55w0rd
+      KEYCLOAK_USER: admin
+      KEYCLOAK_PASSWORD: Pa55w0rd
       # Uncomment the line below if you want to specify JDBC parameters. The parameter below is just an example, and it shouldn't be used in production without knowledge. It is highly recommended that you read the PostgreSQL JDBC driver documentation in order to use it.
       #JDBC_PARAMS: "ssl=true"
     ports:
-      - 8180:8180
+      - "8081:8080"
     depends_on:
       - postgres_cp
       - postgres_kc
+    networks:
+      - backend
+    command:
+      - start-dev
+networks:
+  backend:
+    name: backend
+    driver: bridge
