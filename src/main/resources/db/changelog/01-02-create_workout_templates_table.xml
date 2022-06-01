@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.9.xsd">
+
+  <changeSet id="1654090737618-1" author="kamilszerlag">
+    <createTable schemaName="workout_template" tableName="workout_templates">
+      <column name="id" type="UUID">
+        <constraints nullable="false" primaryKey="true" primaryKeyName="pk_workout_templates"/>
+      </column>
+      <column name="version" type="INT"/>
+      <column name="name" type="VARCHAR(255)"/>
+      <column name="workout_performance_parameters"
+        type="JSONB"/>
+      <column name="owner_id" type="UUID"/>
+    </createTable>
+  </changeSet>
+  <changeSet id="1654090890837-1" author="kamilszerlag" context="dev">
+    <loadData schemaName="workout_template" tableName="workout_templates" file="db/data/workout_templates.csv" separator=";"
+      usePreparedStatements="true">
+      <column name="id" type="uuid"/>
+      <column name="name" type="string"/>
+      <column name="workout_performance_parameters" type="computed"/>
+      <column name="owner_id" type="uuid"/>
+    </loadData>
+  </changeSet>
+
+</databaseChangeLog>

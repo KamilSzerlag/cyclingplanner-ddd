@@ -3,13 +3,14 @@ package pl.ksz.cyclingplanner.template.infrastructure.web;
 import java.net.URI;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.ProblemDetail;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
+import org.zalando.problem.Problem;
+import org.zalando.problem.Status;
 import pl.ksz.cyclingplanner.template.application.WorkoutTemplateDTO;
 import pl.ksz.cyclingplanner.template.application.WorkoutTemplateFacade;
 import pl.ksz.cyclingplanner.template.domain.WorkoutTemplateFailure.CreatingWorkoutTemplateFailure;
@@ -37,9 +38,9 @@ public class WorkoutTemplateController {
                     .build();
         }
         if (result.isFailure()) {
-            return ResponseEntity.of(ProblemDetail.forStatus(HttpStatus.BAD_REQUEST)
+            return new ResponseEntity<>(Problem.builder().withStatus(Status.BAD_REQUEST)
                     .withDetail(result.getFailure().message())
-                    .withInstance(ucb.build().toUri())).build();
+                    .withInstance(ucb.build().toUri()).build(), HttpStatus.BAD_REQUEST);
         }
         return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED)
                 .build();

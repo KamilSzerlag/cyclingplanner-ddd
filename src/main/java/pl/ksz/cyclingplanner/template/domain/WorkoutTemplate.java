@@ -63,7 +63,7 @@ public final class WorkoutTemplate {
                 this.expectedWorkoutPerformanceParameters);
     }
 
-    public WorkoutTemplate fromSnapshot(WorkoutTemplateSnapshot snapshot) {
+    public static WorkoutTemplate fromSnapshot(WorkoutTemplateSnapshot snapshot) {
         return new WorkoutTemplate(new WorkoutTemplateId(snapshot.id()),
                 new WorkoutTemplateName(snapshot.name()),
                 snapshot.expectedWorkoutPerformanceParameters());

@@ -1,5 +1,5 @@
 plugins {
-    id 'org.springframework.boot' version '3.0.0-M2'
+    id 'org.springframework.boot' version '2.7.0'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'org.asciidoctor.convert' version '1.5.8'
     id 'java'
@@ -19,6 +19,7 @@ repositories {
 ext {
     set('snippetsDir', file("build/generated-snippets"))
     set('testcontainersVersion', "1.16.2")
+    set('keycloakVersion', "18.0.0")
 }
 
 dependencies {
@@ -42,7 +43,6 @@ dependencies {
 
     //spock
     testImplementation 'org.spockframework:spock-core:2.2-M1-groovy-4.0'
-    testImplementation 'org.spockframework:spock-core:2.2-M1-groovy-4.0'
     testImplementation 'org.apache.groovy:groovy:4.0.2'
 
     //jpx - for gpx
@@ -59,11 +59,15 @@ dependencies {
 
     //Problem Zalando
     implementation 'org.zalando:problem:0.27.1'
+
+    //Keycloak
+    implementation 'org.keycloak:keycloak-spring-boot-starter:18.0.0'
 }
 
 dependencyManagement {
     imports {
         mavenBom "org.testcontainers:testcontainers-bom:${testcontainersVersion}"
+        mavenBom "org.keycloak.bom:keycloak-adapter-bom:${keycloakVersion}"
     }
 }
 

@@ -4,18 +4,16 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import pl.ksz.cyclingplanner.template.infrastructure.persistance.InMemoryWorkoutTemplateRepository;
+import pl.ksz.cyclingplanner.template.infrastructure.persistance.JpaWorkoutTemplateRepositoryImpl;
 
 @Configuration
 public class WorkoutTemplateConfiguration {
 
-    @Bean
-    @Profile("test")
     public WorkoutTemplateFacade workoutTemplateFacade() {
         return new WorkoutTemplateFacade(new WorkoutTemplateServiceImpl(new WorkoutTemplateMapper(), new InMemoryWorkoutTemplateRepository()));
     }
 
     @Bean
-    @Profile("prod")
     public WorkoutTemplateFacade workoutTemplateFacade(WorkoutTemplateService workoutTemplateService) {
         return new WorkoutTemplateFacade(workoutTemplateService);
     }

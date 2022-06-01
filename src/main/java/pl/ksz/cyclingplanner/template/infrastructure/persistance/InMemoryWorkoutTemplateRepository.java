@@ -1,16 +1,21 @@
 package pl.ksz.cyclingplanner.template.infrastructure.persistance;
 
+import static pl.ksz.cyclingplanner.util.ProfilesConst.*;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
-import pl.ksz.cyclingplanner.template.domain.WorkoutTemplateRepository;
 import pl.ksz.cyclingplanner.template.domain.WorkoutTemplate;
 import pl.ksz.cyclingplanner.template.domain.WorkoutTemplateId;
+import pl.ksz.cyclingplanner.template.domain.WorkoutTemplateRepository;
+import pl.ksz.cyclingplanner.util.ProfilesConst;
 
 @Repository
+@Profile(TEST_PROFILE)
 public class InMemoryWorkoutTemplateRepository implements WorkoutTemplateRepository {
 
     private final Map<UUID, WorkoutTemplate> workoutTemplateStorage = new HashMap<>();
@@ -38,6 +43,11 @@ public class InMemoryWorkoutTemplateRepository implements WorkoutTemplateReposit
         return workoutTemplateStorage.values().stream()
                 .filter(workoutTemplate -> workoutTemplate.getCreatorId().id().equals(athleteId))
                 .toList();
+    }
+
+    @Override
+    public WorkoutTemplate update(WorkoutTemplate workoutTemplate) {
+        return workoutTemplateStorage.replace(workoutTemplate.getId().uuid(), workoutTemplate);
     }
 
     @Override

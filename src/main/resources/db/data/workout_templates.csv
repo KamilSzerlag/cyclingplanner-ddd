@@ -1,0 +1,6 @@
+id;version;name;workout_performance_parameters;owner_id
+a3f0507c-7e32-43bc-a8db-f38f44e84a5e;;Morning ride;('{ "customer": "John Doe", "items": {"product": "Beer","qty": "6"}}')::JSONB;3d246d65-c13f-4f9c-8eb7-5aaa8c377b77
+1c712282-a7ff-4ed5-b242-e57349896fad;;Evening ride;('{ "customer": "John Doe", "items": {"product": "Beer","qty": "6"}}')::JSONB;72551f6e-5cc1-483b-a680-d69cfe905010
+55cb4947-6340-47e2-b026-25fef843c79d;;Lunch ride;('{ "customer": "John Doe", "items": {"product": "Beer","qty": "6"}}')::JSONB;51111f15-f7f9-41de-9cf6-bf0837d341fb
+0fd495ec-99ce-4964-88ea-c772fbc567ce;;Afternoon ride;('{ "customer": "John Doe", "items": {"product": "Beer","qty": "6"}}')::JSONB;1939fc00-4c2b-44e8-80d1-570ac5108308
+8afe8f85-3db7-4b2c-bde1-16fd367a06c4;;Easy ride;('{ "customer": "John Doe", "items": {"product": "Beer","qty": "6"}}')::JSONB;746196c4-7761-46da-9ba1-e82e4deb0ee1

@@ -6,7 +6,7 @@ import java.util.UUID;
 
 public interface WorkoutTemplateRepository {
 
-    WorkoutTemplate save(WorkoutTemplate entity);
+    WorkoutTemplate save(WorkoutTemplate workoutTemplateSnapshot);
 
     Optional<WorkoutTemplate> findById(WorkoutTemplateId id);
 
@@ -15,6 +15,8 @@ public interface WorkoutTemplateRepository {
     List<WorkoutTemplate> findAll();
 
     List<WorkoutTemplate> findAllByAthleteId(UUID AthleteId);
+
+    WorkoutTemplate update(WorkoutTemplate workoutTemplate);
 
     long count();
 

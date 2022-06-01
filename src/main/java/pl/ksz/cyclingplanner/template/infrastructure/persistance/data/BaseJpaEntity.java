@@ -1,18 +1,15 @@
-package pl.ksz.cyclingplanner.template.infrastructure.persistance;
+package pl.ksz.cyclingplanner.template.infrastructure.persistance.data;
 
 import com.vladmihalcea.hibernate.type.json.JsonType;
-import jakarta.persistence.Column;
-import jakarta.persistence.MappedSuperclass;
 import java.util.UUID;
+import javax.persistence.MappedSuperclass;
 import org.hibernate.annotations.TypeDef;
-import org.hibernate.annotations.TypeDefs;
 import org.springframework.data.annotation.Version;
-import org.springframework.data.jpa.domain.AbstractAuditable;
-import pl.ksz.cyclingplanner.template.infrastructure.security.AthleteEntity;
+import org.springframework.data.jpa.domain.AbstractPersistable;
 
 @MappedSuperclass
 @TypeDef(name = "json", typeClass = JsonType.class)
-public class BaseEntity extends AbstractAuditable<AthleteEntity, UUID> {
+public class BaseJpaEntity extends AbstractPersistable<UUID> {
 
     @Version
     private int version;

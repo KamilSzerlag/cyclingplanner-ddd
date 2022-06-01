@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.9.xsd">
+  <changeSet id="1654087563835-1" author="kamilszerlag">
+    <sqlFile path="db/script/create_schema_workout_templates.sql" relativeToChangelogFile="false"/>
+  </changeSet>
+</databaseChangeLog>

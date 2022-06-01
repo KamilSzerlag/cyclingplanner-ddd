@@ -7,3 +7,25 @@ spring:
     url: jdbc:postgresql://localhost:35432/cycling
     username: cycling
     password:
+  liquibase:
+    enabled: true
+    drop-first: false
+    default-schema: public
+    change-log: db/changelog-master.xml
+
+keycloak:
+  realm: cycling
+  auth-server-url: http://127.0.0.1:8081
+  ssl-required: external
+  resource: cycling
+  credentials:
+    secret: 11111111-1111-1111-1111-111111111111
+  use-resource-role-mappings: true
+#  keycloak.securityConstraints[0].authRoles[0] = admin
+#  keycloak.securityConstraints[0].authRoles[1] = user
+#  keycloak.securityConstraints[0].securityCollections[0].name = insecure stuff
+#  keycloak.securityConstraints[0].securityCollections[0].patterns[0] = /insecure
+#
+#  keycloak.securityConstraints[1].authRoles[0] = admin
+#  keycloak.securityConstraints[1].securityCollections[0].name = admin stuff
+#  keycloak.securityConstraints[1].securityCollections[0].patterns[0] = /admin

@@ -13,7 +13,7 @@ import java.util.stream.Collectors
 
 import static pl.ksz.cyclingplanner.WorkoutPerformanceParametersDTOFixture.anOneHundredsWorkoutPerformanceParameters
 
-@ActiveProfiles("Test")
+@ActiveProfiles("test")
 class WorkoutTemplateFacadeTest extends Specification {
 
     WorkoutTemplateFacade workoutTemplateFacade = new WorkoutTemplateConfiguration().workoutTemplateFacade()
@@ -93,13 +93,6 @@ class WorkoutTemplateFacadeTest extends Specification {
         then:
             createResult.isSuccess()
     }
-
-
-
-
-
-
-
 
 
     private void stubSecurityContext(UUID athleteUUID) {

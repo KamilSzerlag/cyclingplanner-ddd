@@ -1,6 +1,6 @@
 package pl.ksz.cyclingplanner.template.domain;
 
-import jakarta.validation.constraints.Max;
+import javax.validation.constraints.Max;
 
 /**
  * Value Object
